@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchDataVuzix, fetchMapFilter, editMapFilter } from '../redux/ActionCreators'
+import { fetchDataVuzix, fetchMapFilter, editMapFilter, loadMapAddressesValues, } from '../redux/ActionCreators'
 import RangeSlider from '../RangeFilter/RangeSlider';
 
 const mapStateToProps = (state) => {
     return {
         DataVuzix: state.dataVuzix,
-        MapFilter: state.mapFilter
+        MapFilter: state.mapFilter,
+        DetailDivData: state.detailDivData,
+        addressValue: state.addressValue
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     fetchDataVuzix: () => dispatch(fetchDataVuzix),
     fetchMapFilter: (data, dateMap) => dispatch(fetchMapFilter(data, dateMap)),
-    editMapFilter: (type, newValue, props) => dispatch(editMapFilter(type, newValue, props))
+    editMapFilter: (type, newValue, props) => dispatch(editMapFilter(type, newValue, props)),
+    // loadMapAddressesValues: () => dispatch(loadMapAddressesValues())
 })
 
 class MainComponent extends Component {

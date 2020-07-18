@@ -80,8 +80,8 @@ class RangeSlider extends Component {
 
             return (
                 <div>
-                    {this.renderDateTime(values, "Selected")}
-                    {this.renderDateTime(updated, "Updated")}
+                    {/* {this.renderDateTime(values, "Selected")}
+                    {this.renderDateTime(updated, "Updated")} */}
                     <div style={{ margin: "5%", height: "5%", width: "90%" }}>
                         {data.length > 0 ?
                             <BarChart
@@ -92,13 +92,13 @@ class RangeSlider extends Component {
                             /> : <></>
                         }
                         <Slider
-                            mode={1}
+                            mode={3}
                             step={hours}
+                            values={values}
                             domain={domain}
                             rootStyle={sliderStyle}
                             onUpdate={this.onUpdate}
                             onChange={this.onChange}
-                            values={values}
                         >
                             <Rail>
                                 {({ getRailProps }) => <MuiRail getRailProps={getRailProps} />}
