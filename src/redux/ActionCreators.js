@@ -42,6 +42,8 @@ export const fetchMapFilter = (data) => (dispatch) => {
     dispatch(
         loadMapFilter({
             isSpeech: false,
+            startDate: data.startDate,
+            endDate: data.endDate,
             personNames: personObject,
             dateValues: [],
             mapDateRange: {
@@ -140,7 +142,7 @@ const personsArray = (m, persons) => m.person_names.forEach(element => {
 
 //Load addresses for Markers - Card Detail Div
 const loadMarkerAddresses = (m, address) => {
-    let expiryDate = new Date().getTime() + 21600000;
+    let expiryDate = new Date().getTime() + 300000;
     let key = `${m.lat.toFixed(3)}:${m.long.toFixed(3)}`;
     const fetchAndLoadMarkerAddresses = () => {
         Promise.all(
@@ -157,4 +159,16 @@ const loadMarkerAddresses = (m, address) => {
         fetchAndLoadMarkerAddresses();
         return { address, expiryDate };
     }
+};
+
+export const updateMapAddressOnExpiry = (data) => dispatch => {
+    let address = new Map(), addressValue;
+    dispatch(addressValueLoading(true));
+    data.forEach(m => {
+        let temp = loadMarkerAddresses(m, address)              //Load Address Values
+        if (temp !== undefined) {
+            addressValue = temp;
+        }
+    });
+    dispatch(loadAddressValue(addressValue));
 }
